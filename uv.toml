@@ -1,0 +1,17 @@
+[project]
+name = "nba-lineup-predictor"
+version = "0.1.0"
+description = "NBA Lineup Efficiency Predictor using Bayesian Networks"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+license = "MIT"
+
+[tool.uv]
+dev-dependencies = ["streamlit>=1.28.0", "pandas>=2.0.0", "numpy>=1.24.0", "plotly>=5.0.0"]
+
+[tool.uv.sources]
+requirements-txt = { path = "requirements.txt" }
+
+[build-system]
+requires = ["uv>=0.4.0"]
+build-backend = "uv.build:build"
