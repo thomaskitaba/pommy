@@ -1,17 +1,13 @@
-[project]
-name = "nba-lineup-predictor"
-version = "0.1.0"
-description = "NBA Lineup Efficiency Predictor using Bayesian Networks"
-authors = ["Your Name <your.email@example.com>"]
-readme = "README.md"
-license = "MIT"
-
 [tool.uv]
+# uv-specific configuration only. Keep project metadata in pyproject.toml
+# or requirements.txt — `uv` does not accept a [project] table here.
 dev-dependencies = ["streamlit>=1.28.0", "pandas>=2.0.0", "numpy>=1.24.0", "plotly>=5.0.0"]
 
 [tool.uv.sources]
 requirements-txt = { path = "requirements.txt" }
 
-[build-system]
-requires = ["uv>=0.4.0"]
-build-backend = "uv.build:build"
+# NOTE: If you want a PEP 621 [project] section for packaging metadata,
+# place that in `pyproject.toml`. `uv`'s config file should only include
+# supported keys (like the `tool.uv` table). Removing [project] and
+# [build-system] prevents the parser error: unknown field `project`.
+prerelease = "allow"
