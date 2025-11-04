@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List, Optional, Tuple, Any
 import logging
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import pickle
 import os
@@ -24,6 +23,7 @@ class BayesianNetworkModel:
         self.model = None
         self.preprocessing_metadata = None
         self.accuracy = 0.0
+        self.probability_tables = None
         
     def train_model(self, df: pd.DataFrame, preprocessing_metadata: Dict) -> Dict:
         """
@@ -84,8 +84,11 @@ class BayesianNetworkModel:
             conditional_probs = {}
             for target_val in df[target_col].unique():
                 subset = df[df[target_col] == target_val]
-                feature_probs = subset[feature].value_counts(normalize=True).to_dict()
-                conditional_probs[target_val] = feature_probs
+                if len(subset) > 0:
+                    feature_probs = subset[feature].value_counts(normalize=True).to_dict()
+                    conditional_probs[target_val] = feature_probs
+                else:
+                    conditional_probs[target_val] = {}
             probability_tables[feature] = conditional_probs
         
         return probability_tables
